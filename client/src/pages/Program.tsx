@@ -5,7 +5,7 @@ import type { ModuleStatus, Volume } from '../types'
 const STATUS_OPTIONS: { value: ModuleStatus; label: string; className: string }[] = [
   { value: 'not_started', label: 'Not started', className: 'bg-slate-100 text-slate-600' },
   { value: 'in_progress', label: 'In progress', className: 'bg-amber-100 text-amber-700' },
-  { value: 'done', label: 'Done', className: 'bg-emerald-100 text-emerald-700' },
+  { value: 'done', label: 'Done', className: 'bg-pink-100 text-pink-700' },
 ]
 
 export default function Program() {
@@ -85,7 +85,7 @@ export default function Program() {
                     onBlur={() => saveNotes(m.id)}
                     placeholder="Notes for this module…"
                     rows={2}
-                    className="mt-2 w-full resize-y rounded-md border border-slate-200 p-2 text-sm outline-none focus:border-emerald-400"
+                    className="mt-2 w-full resize-y rounded-md border border-slate-200 p-2 text-sm outline-none focus:border-pink-400"
                   />
                 </li>
               ))}
@@ -102,7 +102,7 @@ export default function Program() {
               />
               <button
                 onClick={() => addModule(v.id)}
-                className="rounded-md bg-emerald-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-800"
+                className="rounded-md bg-pink-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-pink-800"
               >
                 + Add
               </button>

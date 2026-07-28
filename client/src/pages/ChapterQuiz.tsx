@@ -99,7 +99,7 @@ export default function ChapterQuiz() {
             <button onClick={() => mark(false)} className="rounded-md bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600">
               Incorrect
             </button>
-            <button onClick={() => mark(true)} className="rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700">
+            <button onClick={() => mark(true)} className="rounded-md bg-pink-600 px-4 py-2 text-sm font-medium text-white hover:bg-pink-700">
               Correct
             </button>
           </div>
@@ -112,13 +112,13 @@ export default function ChapterQuiz() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <Link to="/reading" className="text-xs text-emerald-700 hover:underline">← Back to reading</Link>
+          <Link to="/reading" className="text-xs text-pink-700 hover:underline">← Back to reading</Link>
           <h1 className="text-2xl font-semibold">{chapter.title}</h1>
         </div>
         <button
           onClick={startQuiz}
           disabled={questions.length === 0}
-          className="rounded-md bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-800 disabled:bg-slate-300"
+          className="rounded-md bg-pink-700 px-4 py-2 text-sm font-medium text-white hover:bg-pink-800 disabled:bg-slate-300"
         >
           Start quiz ({questions.length})
         </button>

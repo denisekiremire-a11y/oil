@@ -1,7 +1,9 @@
 import type {
+  AppConfig,
   Certification,
   Chapter,
   ChecklistItem,
+  ClassSession,
   DashboardData,
   ModuleItem,
   QuizAttempt,
@@ -68,6 +70,16 @@ export const api = {
   updateChecklistItem: (id: number, patch: Partial<Pick<ChecklistItem, 'topic' | 'done'>>) =>
     request<ChecklistItem>(`/certifications/checklist/${id}`, { method: 'PATCH', body: JSON.stringify(patch) }),
   deleteChecklistItem: (id: number) => request<void>(`/certifications/checklist/${id}`, { method: 'DELETE' }),
+
+  getClassSessions: (certId: number) => request<ClassSession[]>(`/certifications/${certId}/sessions`),
+  saveClassSession: (certId: number, session_date: string, attended: boolean, notes: string) =>
+    request<ClassSession>(`/certifications/${certId}/sessions`, {
+      method: 'PUT',
+      body: JSON.stringify({ session_date, attended, notes }),
+    }),
+
+  // Config
+  getConfig: () => request<AppConfig>('/config'),
 
   // Study log
   getStudyLog: (limit = 50) => request<StudyLogEntry[]>(`/study-log?limit=${limit}`),

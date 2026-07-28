@@ -70,4 +70,29 @@ router.delete('/checklist/:itemId', (req, res) => {
   res.status(204).end()
 })
 
+// Physical class sessions (e.g. CAPM's weekly Sunday classroom course)
+router.get('/:id/sessions', (req, res) => {
+  const rows = db
+    .prepare('SELECT * FROM class_sessions WHERE cert_id = ? ORDER BY session_date')
+    .all(Number(req.params.id))
+    .map((s) => ({ ...s, attended: !!s.attended }))
+  res.json(rows)
+})
+
+router.put('/:id/sessions', (req, res) => {
+  const certId = Number(req.params.id)
+  const { session_date, attended, notes } = req.body
+  if (!session_date) return res.status(400).json({ error: 'session_date is required' })
+  db.prepare(
+    `INSERT INTO class_sessions (cert_id, session_date, attended, notes)
+     VALUES (?, ?, ?, ?)
+     ON CONFLICT(cert_id, session_date)
+     DO UPDATE SET attended = excluded.attended, notes = excluded.notes`,
+  ).run(certId, session_date, attended ? 1 : 0, notes ?? '')
+  const saved = db
+    .prepare('SELECT * FROM class_sessions WHERE cert_id = ? AND session_date = ?')
+    .get(certId, session_date)
+  res.json({ ...saved, attended: !!saved.attended })
+})
+
 export default router

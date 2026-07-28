@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
     certifications: db.prepare('SELECT * FROM certifications ORDER BY sort_order').all(),
     checklist_items: db.prepare('SELECT * FROM checklist_items ORDER BY sort_order').all(),
     study_log: db.prepare('SELECT * FROM study_log ORDER BY id').all(),
+    class_sessions: db.prepare('SELECT * FROM class_sessions ORDER BY session_date').all(),
   }
   res.setHeader('Content-Disposition', `attachment; filename="upca-backup-${Date.now()}.json"`)
   res.json(dump)

@@ -77,6 +77,15 @@ CREATE TABLE IF NOT EXISTS study_log (
   context_id INTEGER,
   created_at TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS class_sessions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  cert_id INTEGER NOT NULL REFERENCES certifications(id) ON DELETE CASCADE,
+  session_date TEXT NOT NULL,
+  attended INTEGER NOT NULL DEFAULT 0,
+  notes TEXT NOT NULL DEFAULT '',
+  UNIQUE(cert_id, session_date)
+);
 `)
 
 const volumeCount = db.prepare('SELECT COUNT(*) AS n FROM volumes').get().n

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
 import { api } from '../lib/api'
-import type { Certification } from '../types'
+import type { AppConfig, Certification } from '../types'
+import ClassSchedule from '../components/ClassSchedule'
 
 const STATUS_OPTIONS = ['not_started', 'in_progress', 'done']
 
 export default function Certifications() {
   const [certs, setCerts] = useState<Certification[]>([])
+  const [config, setConfig] = useState<AppConfig | null>(null)
   const [newTopic, setNewTopic] = useState<Record<number, string>>({})
   const [notesDraft, setNotesDraft] = useState<Record<number, string>>({})
 
@@ -13,7 +15,10 @@ export default function Certifications() {
     api.getCertifications().then(setCerts)
   }
 
-  useEffect(reload, [])
+  useEffect(() => {
+    reload()
+    api.getConfig().then(setConfig)
+  }, [])
 
   async function updateTargetDate(certId: number, date: string) {
     await api.updateCertification(certId, { target_date: date || null })
@@ -87,7 +92,7 @@ export default function Certifications() {
               {c.checklist.map((item) => (
                 <li key={item.id} className="flex items-center justify-between gap-2 text-sm">
                   <label className="flex flex-1 items-center gap-2">
-                    <input type="checkbox" checked={item.done} onChange={() => toggleTopic(item.id, item.done)} className="h-4 w-4" />
+                    <input type="checkbox" checked={item.done} onChange={() => toggleTopic(item.id, item.done)} className="h-4 w-4 accent-pink-600" />
                     <span className={item.done ? 'text-slate-400 line-through' : ''}>{item.topic}</span>
                   </label>
                   <button onClick={() => removeTopic(item.id)} className="text-xs text-red-500 hover:underline">
@@ -107,7 +112,7 @@ export default function Certifications() {
               />
               <button
                 onClick={() => addTopic(c.id)}
-                className="rounded-md bg-emerald-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-800"
+                className="rounded-md bg-pink-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-pink-800"
               >
                 + Add
               </button>
@@ -121,9 +126,15 @@ export default function Certifications() {
                 onBlur={() => saveNotes(c.id)}
                 rows={5}
                 placeholder="Markdown notes, formulas, key definitions…"
-                className="w-full resize-y rounded-md border border-slate-200 p-2 font-mono text-xs outline-none focus:border-emerald-400"
+                className="w-full resize-y rounded-md border border-slate-200 p-2 font-mono text-xs outline-none focus:border-pink-400"
               />
             </div>
+
+            {config && c.name === config.capmClassName && (
+              <div className="mt-4 border-t border-slate-100 pt-4">
+                <ClassSchedule certId={c.id} startDate={config.capmClassStart} endDate={config.programEnd} />
+              </div>
+            )}
           </section>
         )
       })}

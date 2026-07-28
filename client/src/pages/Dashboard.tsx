@@ -34,8 +34,8 @@ export default function Dashboard() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-lg border border-slate-200 bg-white p-4">
           <h2 className="mb-1 text-sm font-semibold text-slate-700">UPCA Program</h2>
-          <p className="mb-2 text-2xl font-bold text-emerald-700">{data.upca.percent}% complete</p>
-          <ProgressBar percent={data.upca.percent} colorClass="bg-emerald-600" />
+          <p className="mb-2 text-2xl font-bold text-pink-700">{data.upca.percent}% complete</p>
+          <ProgressBar percent={data.upca.percent} colorClass="bg-pink-600" />
           <p className="mt-1 text-xs text-slate-500">
             {data.upca.doneModules} / {data.upca.totalModules} modules done
           </p>
@@ -57,7 +57,7 @@ export default function Dashboard() {
           <p className="mt-2 text-sm text-slate-600">
             <span className="font-semibold">{data.weekMinutes}</span> minutes studied this week
           </p>
-          <Link to="/study-log" className="mt-2 inline-block text-xs text-emerald-700 hover:underline">
+          <Link to="/study-log" className="mt-2 inline-block text-xs text-pink-700 hover:underline">
             Log study time →
           </Link>
         </div>
@@ -70,7 +70,7 @@ export default function Dashboard() {
             <li key={c.id} className="rounded-md border border-slate-100 bg-slate-50 p-3">
               <p className="text-sm font-medium">{c.name}</p>
               {c.target_date ? (
-                <p className={`text-lg font-bold ${c.days_remaining !== null && c.days_remaining < 0 ? 'text-red-600' : 'text-emerald-700'}`}>
+                <p className={`text-lg font-bold ${c.days_remaining !== null && c.days_remaining < 0 ? 'text-red-600' : 'text-pink-700'}`}>
                   {c.days_remaining !== null && c.days_remaining >= 0
                     ? `${c.days_remaining} days left`
                     : `${Math.abs(c.days_remaining ?? 0)} days overdue`}
@@ -82,7 +82,7 @@ export default function Dashboard() {
             </li>
           ))}
         </ul>
-        <Link to="/certifications" className="mt-2 inline-block text-xs text-emerald-700 hover:underline">
+        <Link to="/certifications" className="mt-2 inline-block text-xs text-pink-700 hover:underline">
           Manage certifications →
         </Link>
       </div>
@@ -95,7 +95,7 @@ export default function Dashboard() {
           <ul className="space-y-1">
             {data.whatsNext.map((item, i) => (
               <li key={i}>
-                <Link to={NEXT_LINKS[item.type] ?? '/'} className="text-sm text-slate-700 hover:text-emerald-700 hover:underline">
+                <Link to={NEXT_LINKS[item.type] ?? '/'} className="text-sm text-slate-700 hover:text-pink-700 hover:underline">
                   {item.label}
                 </Link>
               </li>

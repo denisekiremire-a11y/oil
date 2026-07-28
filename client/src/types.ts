@@ -60,6 +60,21 @@ export interface Certification {
   checklist: ChecklistItem[]
 }
 
+export interface ClassSession {
+  id: number
+  cert_id: number
+  session_date: string
+  attended: boolean
+  notes: string
+}
+
+export interface AppConfig {
+  programStart: string
+  programEnd: string
+  capmClassName: string
+  capmClassStart: string
+}
+
 export interface StudyLogEntry {
   id: number
   date: string

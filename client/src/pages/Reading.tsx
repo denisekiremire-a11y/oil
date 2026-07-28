@@ -42,7 +42,7 @@ export default function Reading() {
           placeholder="Add a chapter title…"
           className="flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm"
         />
-        <button onClick={addChapter} className="rounded-md bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-800">
+        <button onClick={addChapter} className="rounded-md bg-pink-700 px-4 py-2 text-sm font-medium text-white hover:bg-pink-800">
           + Add chapter
         </button>
       </div>
@@ -51,18 +51,18 @@ export default function Reading() {
         {chapters.map((c) => (
           <li key={c.id} className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-slate-200 bg-white p-3">
             <label className="flex items-center gap-2">
-              <input type="checkbox" checked={c.is_read} onChange={() => toggleRead(c)} className="h-4 w-4" />
+              <input type="checkbox" checked={c.is_read} onChange={() => toggleRead(c)} className="h-4 w-4 accent-pink-600" />
               <span className={c.is_read ? 'text-slate-500' : 'font-medium'}>{c.title}</span>
             </label>
             <div className="flex items-center gap-3 text-xs">
-              {c.self_assessment_completed && <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-emerald-700">self-assessed</span>}
+              {c.self_assessment_completed && <span className="rounded-full bg-pink-100 px-2 py-0.5 text-pink-700">self-assessed</span>}
               {c.latest_score && (
                 <span className="text-slate-500">
                   last score: {c.latest_score.correct}/{c.latest_score.total}
                 </span>
               )}
               <span className="text-slate-400">{c.question_count} question{c.question_count === 1 ? '' : 's'}</span>
-              <Link to={`/reading/${c.id}/quiz`} className="font-medium text-emerald-700 hover:underline">
+              <Link to={`/reading/${c.id}/quiz`} className="font-medium text-pink-700 hover:underline">
                 Quiz →
               </Link>
               <button onClick={() => removeChapter(c.id)} className="text-red-500 hover:underline">

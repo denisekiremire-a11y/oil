@@ -101,7 +101,7 @@ export default function StudyLog() {
             ))}
           </optgroup>
         </select>
-        <button type="submit" className="rounded-md bg-emerald-700 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-800">
+        <button type="submit" className="rounded-md bg-pink-700 px-4 py-2 text-sm font-medium text-white hover:bg-pink-800">
           Log it
         </button>
       </form>
@@ -119,7 +119,7 @@ export default function StudyLog() {
               return (
                 <div key={d.date} className="flex flex-1 flex-col items-center gap-1">
                   <div
-                    className="w-full rounded-t bg-emerald-500"
+                    className="w-full rounded-t bg-pink-500"
                     style={{ height: `${Math.max((d.minutes / maxMinutes) * 64, d.minutes > 0 ? 4 : 0)}px` }}
                     title={`${d.minutes} min`}
                   />
