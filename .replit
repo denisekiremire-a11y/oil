@@ -1,5 +1,6 @@
 run = "npm install --include=dev && npm start"
 entrypoint = "server/src/index.js"
+modules = ["nodejs-22"]
 
 [env]
 NODE_ENV = "production"
