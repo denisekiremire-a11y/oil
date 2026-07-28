@@ -1,4 +1,4 @@
-run = "npm install && npm start"
+run = "npm install --include=dev && npm start"
 entrypoint = "server/src/index.js"
 
 [env]
@@ -9,5 +9,5 @@ localPort = 3001
 externalPort = 80
 
 [deployment]
-build = ["sh", "-c", "npm install && npm run build -w client"]
+build = ["sh", "-c", "npm install --include=dev && npm run build -w client"]
 run = ["sh", "-c", "npm run start -w server"]
