@@ -1,26 +1,50 @@
-# StudyDesk
+# UPCA Tracker
 
-A local-only study app: organize subjects, take notes, drill flashcards
-with spaced repetition (SM-2), auto-generate multiple-choice quizzes from
-your flashcards, and plan study sessions on a calendar. All data is stored
-in your browser (`localStorage`) — no account or server required.
+A personal study-tracking app for the Uganda Petroleum Commercial Academy
+(UPCA) career prep program. Local-first, single-user: a React (Vite)
+frontend talks to a small Express API backed by SQLite, so your progress
+persists across restarts with no external database or account required.
 
-## Features
+## Modules
 
-- **Subjects** — organize everything by topic with a color tag.
-- **Notes** — freeform notes per subject.
-- **Flashcards** — front/back cards reviewed with an SM-2 spaced-repetition
-  scheduler (Again / Hard / Good / Easy).
-- **Quiz** — multiple-choice quizzes auto-generated from a subject's
-  flashcards, with score history.
-- **Planner** — schedule study sessions and track completion.
-- **Dashboard** — due flashcards, upcoming sessions, and recent quiz scores
-  at a glance.
+- **UPCA Program Tracker** — five volumes (Student Handbook, Course Notes,
+  Resource Library, Career Toolkit, Entrepreneurship Workbook), each with
+  modules you mark Not Started / In Progress / Done, plus free-text notes
+  per module. Shows a progress bar against the program's July–December
+  2026 window.
+- **Reading Tracker (Oil 101)** — chapters with "read" and
+  "self-assessment completed" checkboxes. Paste in your own self-assessment
+  questions and answers, then quiz yourself (reveal answer, mark
+  correct/incorrect) and track a comprehension score over time per chapter.
+- **Certification Tracker** — CAPM, Petroleum Products Trading, and Trade
+  Finance & Incoterms, each with a target date/countdown, status, an
+  editable syllabus checklist, and a notes/formula-sheet section.
+- **Study Log / Streak** — 10-second daily logging (minutes, what you
+  studied, optional module/cert link), a streak counter, and a weekly
+  minutes-per-day chart.
+- **Dashboard** — UPCA % complete, days until each certification target,
+  current streak, this week's minutes, and "what's next" across all
+  modules.
+
+## Data & backup
+
+All data lives in `server/data/upca.sqlite3`. Use the "Export backup"
+button in the app header to download a full JSON snapshot at any time.
 
 ## Development
 
 ```bash
-npm install
-npm run dev      # start dev server
-npm run build    # type-check and build for production
+npm install       # installs both client and server workspaces
+npm run dev       # runs the API (port 3001) and the Vite dev server (port 5173) together
 ```
+
+Then open http://localhost:5173.
+
+```bash
+npm run build     # type-checks and builds the client for production
+```
+
+## Project layout
+
+- `server/` — Express API + SQLite (better-sqlite3)
+- `client/` — React + TypeScript + Vite + Tailwind frontend
