@@ -1,0 +1,9 @@
+run = "npm install && npm start"
+entrypoint = "server/src/index.js"
+
+[env]
+NODE_ENV = "production"
+
+[[ports]]
+localPort = 3001
+externalPort = 80
