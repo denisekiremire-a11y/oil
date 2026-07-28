@@ -1,0 +1,16 @@
+{
+  "name": "upca-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c green,cyan \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.4"
+  }
+}
